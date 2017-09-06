@@ -14,5 +14,25 @@ module SevenNote
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.cache_store = :redis_store, {
+	  host: "localhost",
+	  port: 6379,
+	  db: 0,
+	  password: "12345",
+	  namespace: "cache"
+	}
+	config.session_store :redis_store, {
+	  servers: [
+	    {
+	      host: "localhost",
+	      port: 6379,
+	      db: 0,
+	      password: "12345",
+	      namespace: "session"
+	    },
+	  ],
+	  expire_after: 90.minutes,
+	  key: "_#{Rails.application.class.parent_name.downcase}_session"
+	}
   end
 end
