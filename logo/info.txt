@@ -1,0 +1,5 @@
+Created with Inkscape v0.91
+
+Background color:
+	RGB: rgb(75,140,185)
+	HEX: #4b8cb9

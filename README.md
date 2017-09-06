@@ -67,9 +67,9 @@ rake db:create:all
 ```
 ##### Migrate
 ```
-RAILS_ENV=development
-rake db:seed
-rake db:migrate
+RAILS_ENV=test &&\
+rails db:seed &&\
+rails db:migrate
 ```
 ##### Install redis
 ```
