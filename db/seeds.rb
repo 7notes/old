@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 class DropAccounts < ActiveRecord::Migration[5.1]
-  drop_table :users, if_exists: true
+  drop_table :accounts, if_exists: true
 end
 class DropOthers < ActiveRecord::Migration[5.1]
   drop_table :ar_internal_metadata, if_exists: true
