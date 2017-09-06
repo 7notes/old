@@ -104,7 +104,7 @@ mv -f font-awesome-4.7.0/fonts/* public/css/fonts &&\
 rm -r font-awesome-4.7.0
 ```
 ##### Install bootstrap 3.
-````
+```
 rm -f bootstrap-3.3.7-dist.zip &&\
 rm -rf bootstrap-3.3.7-dist &&\
 wget https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip &&\
@@ -117,24 +117,18 @@ mv -f bootstrap-3.3.7-dist/fonts/* public/css/fonts &&\
 rm -r bootstrap-3.3.7-dist
 ```
 ##### Install bootstrap 4.
-````
-mkdir bootstrap4 &&\
-cd bootstrap4 &&\
-wget https://github.com/twbs/bootstrap/releases/download/v4.0.0-beta/bootstrap-4.0.0-beta-dist.zip &&\
-unzip bootstrap-4.0.0-beta-dist.zip &&\
-rm bootstrap-4.0.0-beta-dist.zip &&\
-mv -f js/bootstrap.min.js ../public/js/lib/bootstrap.js &&\
-mv -f css/bootstrap.min.css ../public/css/lib/bootstrap.css &&\
-mv -f css/bootstrap-grid.min.css ../public/css/lib/bootstrap-grid.min.css &&\
-mv -f css/bootstrap-reboot.min.css ../public/css/lib/bootstrap-reboot.min.css &&\
-cd ../ &&\
-rm -r bootstrap4 &&\
+```
+wget https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css &&\
+mv -f bootstrap.min.css public/css/lib/bootstrap.css &&\
 
 wget https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js &&\
-mv -f popper.min.js public/js/lib/popper.js
+mv -f popper.min.js public/js/lib/popper.js &&\
+
+wget https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js &&\
+mv -f bootstrap.min.js public/js/lib/bootstrap.js
 ```
 ##### Install bootstrap datepicker.
-````
+```
 rm -rf bootstrap-datepicker &&\
 mkdir bootstrap-datepicker &&\
 cd bootstrap-datepicker &&\
@@ -161,7 +155,7 @@ mv -f angular-cookies.min.js public/js/lib/angular-cookies.js  &&\
 
 wget http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-sanitize.min.js &&\
 mv -f angular-sanitize.min.js public/js/lib/angular-sanitize.js
-````
+```
 ##### Install UnderscoreJS and Normalize-CSS.
 ```
 wget http://underscorejs.org/underscore-min.js &&\
