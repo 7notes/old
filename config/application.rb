@@ -17,7 +17,7 @@ module SevenNote
     config.cache_store = :redis_store, {
 	  host: "localhost",
 	  port: 6379,
-	  db: 0,
+	  db: "cache",
 	  password: "12345",
 	  namespace: "cache"
 	}
@@ -26,7 +26,7 @@ module SevenNote
 	    {
 	      host: "localhost",
 	      port: 6379,
-	      db: 0,
+	      db: "session",
 	      password: "12345",
 	      namespace: "session"
 	    },

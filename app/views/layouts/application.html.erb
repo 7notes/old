@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SevenNote</title>
+    <title><%= @title%></title>
     <%= csrf_meta_tags %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript" src="js/lib/underscore.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/popper.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/bootbox.js"></script>
+    <script type="text/javascript" src="js/lib/angular.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route.js"></script>
+    <script type="text/javascript" src="js/lib/angular-cookies.js"></script>
+    <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/lib/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/lib/font-awesome.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

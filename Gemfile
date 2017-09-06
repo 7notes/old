@@ -66,19 +66,3 @@ gem 'redis-rails', '~> 5.0'
 
 # Slim template.
 gem 'slim-rails', '~> 3.1'
-# Underscore.
-gem 'underscore-rails', '~> 1.8'
-# jQuery.
-gem 'jquery-rails', '~> 4.3'
-# Bootstrap.
-gem 'bootstrap', '~> 4.0.0.beta'
-# Bootstrap bootbox.
-gem 'bootbox-rails', '~> 0.5.0'
-# Font awesome.
-gem 'font-awesome-rails', '~> 4.7'
-# AngularJS.
-gem 'angularjs-rails', '~> 1.6'
-# AngularJS router.
-gem 'angular-ui-router-rails', '~> 0.2.15'
-# Normalizer CSS.
-gem 'normalize-rails', '~> 4.1'

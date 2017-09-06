@@ -80,6 +80,109 @@ make
 sudo cp src/redis-server /usr/local/bin/
 sudo cp src/redis-cli /usr/local/bin/
 ```
+##### Git commit
+```
+git rm -r --cached . && git reset && git add --all && git commit -m "My comment" && git push origin master
+```
+##### Save in development
+```
+git checkout dev && sudo chmod 777 save.sh && ./save.sh
+```
+##### NPM install.
+```
+npm install
+```
+##### Install font awesome.
+```
+rm -f font-awesome-4.7.0.zip &&\
+rm -rf font-awesome-4.7.0 &&\
+wget http://fontawesome.io/assets/font-awesome-4.7.0.zip &&\
+unzip font-awesome-4.7.0.zip &&\
+rm font-awesome-4.7.0.zip &&\
+mv -f font-awesome-4.7.0/css/font-awesome.min.css public/css/lib/font-awesome.css &&\
+mv -f font-awesome-4.7.0/fonts/* public/css/fonts &&\
+rm -r font-awesome-4.7.0
+```
+##### Install bootstrap 3.
+````
+rm -f bootstrap-3.3.7-dist.zip &&\
+rm -rf bootstrap-3.3.7-dist &&\
+wget https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip &&\
+unzip bootstrap-3.3.7-dist.zip &&\
+rm bootstrap-3.3.7-dist.zip &&\
+mv -f bootstrap-3.3.7-dist/css/bootstrap.min.css public/css/lib/bootstrap.css &&\
+mv -f bootstrap-3.3.7-dist/css/bootstrap-theme.min.css public/css/lib/bootstrap-theme.css &&\
+mv -f bootstrap-3.3.7-dist/js/bootstrap.js public/js/lib/bootstrap.js &&\
+mv -f bootstrap-3.3.7-dist/fonts/* public/css/fonts &&\
+rm -r bootstrap-3.3.7-dist
+```
+##### Install bootstrap 4.
+````
+mkdir bootstrap4 &&\
+cd bootstrap4 &&\
+wget https://github.com/twbs/bootstrap/releases/download/v4.0.0-beta/bootstrap-4.0.0-beta-dist.zip &&\
+unzip bootstrap-4.0.0-beta-dist.zip &&\
+rm bootstrap-4.0.0-beta-dist.zip &&\
+mv -f js/bootstrap.min.js ../public/js/lib/bootstrap.js &&\
+mv -f css/bootstrap.min.css ../public/css/lib/bootstrap.css &&\
+mv -f css/bootstrap-grid.min.css ../public/css/lib/bootstrap-grid.min.css &&\
+mv -f css/bootstrap-reboot.min.css ../public/css/lib/bootstrap-reboot.min.css &&\
+cd ../ &&\
+rm -r bootstrap4 &&\
+
+wget https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js &&\
+mv -f popper.min.js public/js/lib/popper.js
+```
+##### Install bootstrap datepicker.
+````
+rm -rf bootstrap-datepicker &&\
+mkdir bootstrap-datepicker &&\
+cd bootstrap-datepicker &&\
+wget https://github.com/uxsolutions/bootstrap-datepicker/releases/download/v1.6.4/bootstrap-datepicker-1.6.4-dist.zip &&\
+unzip bootstrap-datepicker-1.6.4-dist.zip &&\
+rm bootstrap-datepicker-1.6.4-dist.zip &&\
+cd ../ &&\
+mv -f bootstrap-datepicker/js/bootstrap-datepicker.min.js public/js/lib/bootstrap-datepicker.js &&\
+mv -f bootstrap-datepicker/css/bootstrap-datepicker.min.css public/css/lib/bootstrap-datepicker.css &&\
+mv -f bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css public/css/lib/bootstrap-datepicker.standalone.css &&\
+mv -f bootstrap-datepicker/locales/bootstrap-datepicker.en-AU.min.js public/js/lib/bootstrap-datepicker.en-AU.js
+rm -rf bootstrap-datepicker
+```
+##### Install AngularJS.
+```
+wget https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js &&\
+mv -f angular.min.js public/js/lib/angular.js &&\
+
+wget http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js &&\
+mv -f angular-route.min.js public/js/lib/angular-route.js  &&\
+
+wget http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-cookies.min.js &&\
+mv -f angular-cookies.min.js public/js/lib/angular-cookies.js  &&\
+
+wget http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-sanitize.min.js &&\
+mv -f angular-sanitize.min.js public/js/lib/angular-sanitize.js
+````
+##### Install UnderscoreJS and Normalize-CSS.
+```
+wget http://underscorejs.org/underscore-min.js &&\
+mv -f underscore-min.js public/js/lib/underscore.js &&\
+
+wget https://necolas.github.io/normalize.css/7.0.0/normalize.css &&\
+mv -f normalize.css public/css/lib/normalize.css
+```
+##### Install jQuery.
+```
+wget https://code.jquery.com/jquery-3.2.1.min.js &&\
+mv -f jquery-3.2.1.min.js public/js/lib/jquery.js &&\
+
+wget https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js &&\
+mv -f jquery.cookie.min.js public/js/lib/jquery.cookie.js
+```
+##### Install bootbox.
+```
+wget https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js &&\
+mv -f bootbox.min.js public/js/lib/bootbox.js
+```
 ##### Run redis server
 ```
 redis-server ./redis.conf
@@ -97,12 +200,4 @@ bundle exec rspec
 ##### Run RoR server
 ```
 rails s
-```
-##### Git commit
-```
-git rm -r --cached . && git reset && git add --all && git commit -m "My comment" && git push origin master
-```
-##### Save in development
-```
-git checkout dev && sudo chmod 777 save.sh && ./save.sh
 ```
