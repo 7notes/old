@@ -83,7 +83,7 @@ sudo cp src/redis-cli /usr/local/bin/
 ##### Run redis server
 ```
 redis-server ./redis.conf
-````
+```
 ##### Install gems.
 ```
 bundle install
