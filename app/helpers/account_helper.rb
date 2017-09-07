@@ -1,6 +1,4 @@
 module AccountHelper
-  @time = Time.now.getutc.strftime("%s").to_i
-  @datetime = Time.now.getutc
   class AccountConfiguration
     attr_reader :default, :languages, :regexp
     def initialize
@@ -106,5 +104,32 @@ module AccountHelper
     	end
     	return false
     end
+  end
+  def init_account
+    @current_user = Account.find(session[:account_id]) rescue nil
+    @is_auth = false
+    unless @current_user.nil?
+        @is_auth = true
+    end
+  end
+  def login account
+    begin
+        session[:account_id] = account.id
+        return true
+    rescue
+        return false
+    end
+  end
+  def logout
+    begin
+        session.delete(:account_id)
+        return true
+    rescue
+        return false
+    end
+  end
+  def encrypt_password value
+    @normalizer = AccountNormalizer.new
+    return BCrypt::Password.create(@normalizer.password(value)).to_s
   end
 end

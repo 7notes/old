@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="<%= @page_name%>">
   <head>
     <title><%= @title%></title>
     <%= csrf_meta_tags %>
@@ -18,10 +18,10 @@
     <link rel="stylesheet" type="text/css" href="<%=root_url%>/css/lib/bootstrap.css">
     <link rel="shortcut icon" type="image/x-icon" href="<%=root_url%>/favicon.ico">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= yield %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

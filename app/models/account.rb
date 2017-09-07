@@ -17,12 +17,12 @@ class Account < ApplicationRecord
   self.table_name = "accounts"
 
   before_save do
-    self.password = BCrypt::Password.create self.password if self.password_changed?
+    self.password = encrypt_password(self.password) if self.password_changed?
   end
-  before_save(on: :create) do
-  	self.sign_up_at = @datetime
-    self.sign_in_at = @datetime
-  end
+  before_validation(on: :create) do
+    self.sign_up_at = $datetime
+    self.sign_in_at = self.sign_up_at
+    end
   before_validation do
   	@normalizer = AccountNormalizer.new
   	self.username = @normalizer.username self.username if self.username_changed?
@@ -32,8 +32,13 @@ class Account < ApplicationRecord
   	self.last_name = @normalizer.last_name self.last_name if self.last_name_changed?
   	self.language = @normalizer.language self.language if self.language_changed?
   	unless self.new_record?
-  		self.is_active = @normalizer.is_active self.is_active if self.is_active_changed?
+      self.is_active = @normalizer.is_active self.is_active if self.is_active_changed?
   	end
+  end
+
+  def check_password value
+    @normalizer = AccountNormalizer.new
+    return BCrypt::Password.new(self.password) == @normalizer.password(value)
   end
 
   validates :username,

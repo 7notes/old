@@ -1,4 +1,4 @@
-div data-page="sign_up"
+div data-page="#{@page_name}" ng-controller="form"
 	div.card
 		div.card-header
 			ul.nav.nav-pills.card-header-pills
@@ -17,22 +17,22 @@ div data-page="sign_up"
 		div.card-block
 			form onsubmit="return false" autocomplete="off"
 				div.form-group
-					input.form-control placeholder="First name" type="text"
+					input.form-control placeholder="First name" type="text" ng-model="form.first_name"
 				div.form-group
-					input.form-control placeholder="Last name" type="text"
+					input.form-control placeholder="Last name" type="text" ng-model="form.last_name"
 				div.form-group
 					label.custom-control.custom-radio
-						input.custom-control-input type="radio" name="gender" value="1"
+						input.custom-control-input type="radio" name="gender" value="1" ng-model="form.gender"
 						span.custom-control-indicator
 						span.custom-control-description Male
 					label.custom-control.custom-radio
-						input.custom-control-input type="radio" name="gender" value="0"
+						input.custom-control-input type="radio" name="gender" value="0" ng-model="form.gender"
 						span.custom-control-indicator
 						span.custom-control-description Female
 				div.form-group
-					input.form-control placeholder="Email (not necessarily)" type="text"
+					input.form-control placeholder="Email (not necessarily)" type="text" ng-model="form.email"
 				div.form-group
-					input.form-control placeholder="Username" type="text"
+					input.form-control placeholder="Username" type="text" ng-model="form.username"
 				div.form-group
-					input.form-control placeholder="Password" type="text"
-				button.btn.btn-primary type="button" Sign up
+					input.form-control placeholder="Password" type="text" ng-model="form.password"
+				button.btn.btn-primary type="button" ng-click="submit()" Sign up

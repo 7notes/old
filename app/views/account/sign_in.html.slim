@@ -1,4 +1,4 @@
-div data-page="sign_in"
+div data-page="#{@page_name}" ng-controller="form"
 	div.card
 		div.card-header
 			ul.nav.nav-pills.card-header-pills
@@ -21,9 +21,9 @@ div data-page="sign_in"
 				| Username or password is invalid
 			form onsubmit="return false" autocomplete="off"
 				div.form-group
-					input.form-control placeholder="Username" type="text"
+					input.form-control placeholder="Username" type="text" ng-model="form.username"
 				div.form-group
-					input.form-control placeholder="Password" type="password"
-				button.btn.btn-primary type="button" Sign in
+					input.form-control placeholder="Password" type="password" ng-model="form.password"
+				button.btn.btn-primary type="button" ng-click="submit()" Sign in
 			div.links
 				a href="#" Recovery password

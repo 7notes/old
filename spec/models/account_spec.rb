@@ -17,11 +17,13 @@ RSpec.describe Account, type: :model do
 		account.last_name = "алдан"
 		account.gender = "1"
 		account.language = "kk"
-
-		begin
-			account.save!
-		rescue ActiveRecord::RecordInvalid
-			puts account.errors.messages
+		
+		ActiveRecord::Base.transaction(isolation: :serializable) do
+			begin
+				account.save!
+			rescue ActiveRecord::RecordInvalid
+				puts account.errors.messages
+			end
 		end
 		expect(account.valid?).to be true
 	end
