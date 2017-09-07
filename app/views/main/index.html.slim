@@ -1,1 +1,27 @@
-div Hello!
+nav.navbar.navbar-expand-lg.fixed-top.navbar-dark
+	div.container
+		a.navbar-brand href="/"
+			= image_tag image_url "logo.png"
+		button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+			span.navbar-toggler-icon
+		#navbarSupportedContent.collapse.navbar-collapse
+			ul.navbar-nav.mr-auto
+				li.nav-item
+					a.nav-link.mr-1 href="#" TOP-250
+				li.nav-item
+					a.nav-link.mr-1 href="#" Categories
+				li.nav-item
+					a.nav-link.mr-1 href="#" My music
+			form.form-inline.my-2.mr-3 onsubmit="return false" autocomplete="off"
+				label
+					div.input-group
+						div.input-group-addon
+							i.fa.fa-search
+						input.form-control aria-label="Search" placeholder="Performer or Name" type="text"
+			div.btn-group.my-2.my-lg-0 role="group" aria-label="Basic example"
+				button.btn.btn-warning type="button"
+					| Join
+					i.fa.fa-plus.ml-2
+				button.btn.btn-dark type="button"
+					| Login
+					i.fa.fa-sign-in.ml-2
