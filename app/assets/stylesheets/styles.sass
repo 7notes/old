@@ -3,7 +3,8 @@ body
 	cursor: default
 button.btn,
 a.btn,
-a[href]
+a[href],
+.alert button.close
 	cursor: pointer
 
 $color: #4b8cb9
@@ -26,3 +27,30 @@ nav.navbar
 		input
 			background-clip: border-box
 			border: none
+div[data-page='sign_in'],
+div[data-page='sign_up']
+	div.card
+		max-width: 500px
+		margin: 25px auto
+		margin-top: 80px
+		div.card-block
+			padding: 25px
+			form,
+			.alert,
+			.links
+				max-width: 400px
+				margin: 0 auto
+			.alert
+				display: none
+			form
+				button
+					width: 100%
+			div.links
+				margin-top: 15px
+	@media screen and (max-width: 520px)
+		div.card
+			margin-top: 0
+			border-radius: 0
+			border-width: 0
+			div.card-header
+				border-radius: 0

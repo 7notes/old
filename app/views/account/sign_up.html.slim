@@ -1,0 +1,38 @@
+div data-page="sign_up"
+	div.card
+		div.card-header
+			ul.nav.nav-pills.card-header-pills
+				li.nav-item
+					a.nav-link href="/"
+						i.fa.fa-home.mr-1
+						| Home
+				li.nav-item
+					a.nav-link href="/account/sign_in"
+						i.fa.fa-sign-in.mr-1
+						| Sign in
+				li.nav-item
+					a.nav-link.active
+						i.fa.fa-plus.mr-1
+						| Sign up
+		div.card-block
+			form onsubmit="return false" autocomplete="off"
+				div.form-group
+					input.form-control placeholder="First name" type="text"
+				div.form-group
+					input.form-control placeholder="Last name" type="text"
+				div.form-group
+					label.custom-control.custom-radio
+						input.custom-control-input type="radio" name="gender" value="1"
+						span.custom-control-indicator
+						span.custom-control-description Male
+					label.custom-control.custom-radio
+						input.custom-control-input type="radio" name="gender" value="0"
+						span.custom-control-indicator
+						span.custom-control-description Female
+				div.form-group
+					input.form-control placeholder="Email (not necessarily)" type="text"
+				div.form-group
+					input.form-control placeholder="Username" type="text"
+				div.form-group
+					input.form-control placeholder="Password" type="text"
+				button.btn.btn-primary type="button" Sign up
