@@ -56,8 +56,6 @@ end
 
 # PostgreSQL.
 gem 'pg', '~> 0.18.2'
-# Devise.
-gem 'devise', '~> 4.2'
 # Redis.
 gem 'redis', '~> 3.2'
 # Session and cache store.

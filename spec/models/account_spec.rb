@@ -1,5 +1,29 @@
 require 'rails_helper'
 
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+RSpec.configure do |c|
+    c.use_transactional_examples = false
+    c.order = "defined"
+end
+
 RSpec.describe Account, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	account = Account.new
+	it "sign up" do
+		account.username = "Nurasyl"
+		account.email = ""
+		account.password = "123456"
+		account.first_name = "нұрасыл"
+		account.last_name = "алдан"
+		account.gender = "1"
+		account.language = "kk"
+
+		begin
+			account.save!
+		rescue ActiveRecord::RecordInvalid
+			puts account.errors.messages
+		end
+		expect(account.valid?).to be true
+	end
+	after(:all) { Account.destroy_all }
 end
