@@ -64,3 +64,5 @@ gem 'redis-rails', '~> 5.0'
 
 # Slim template.
 gem 'slim-rails', '~> 3.1'
+# Pagination for model.
+gem 'will_paginate', '~> 3.1.0'

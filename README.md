@@ -84,7 +84,7 @@ sudo cp src/redis-cli /usr/local/bin/
 ```
 ##### Git commit
 ```
-git rm -r --cached . && git reset && git add --all && git commit -m "My comment" && git push origin master
+git reset && git rm -r --cached . && git reset && git add --all && git commit -m "My comment" && git push origin master
 ```
 ##### Save in development
 ```

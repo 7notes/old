@@ -65,29 +65,103 @@ class Account < ApplicationRecord
   validates :password,
       length: { minimum: 6, maximum: 100, too_short: "min", too_long: "max" }
 
-  def self.search input
-    scanner = AccountHelper::AccountScanner.new
+  def self.search input = nil, page = 1
+    input = input.to_s.strip
+    page = page.to_i
+    page = 1 if (page == 0)
+
+    scanner = AccountHelper::AccountDataScanner.new
     normalizer = AccountHelper::AccountNormalizer.new
     users = Array.new
 
-    input = input.to_s.strip
+    select_ = [:id, :username, :first_name, :last_name, :first_name_ru, :last_name_ru, :first_name_en, :last_name_en, :sign_in_at]
+    order_ = {sign_in_at: :desc, id: :desc}
+    where_ = {is_active: true}
+    paginate_ = {:page => page, :per_page => 50}
 
-    if scanner.id(input)
-      # Is ID.
-      id = input
-      user = Account.find_by(id: id, is_active: true) rescue nil
-      users.push user
+    if input == ""
+      # Select all users.
+      users = Account.select(select_).order(order_).paginate(paginate_).where(where_)
     else
-      names = split_string input
-      if names.size == 0
-        Account.select(:id, :username).order(sign_in_at: :desc).where(is_active: true).limit(100).all
+      if scanner.id(input)
+        id = normalizer.id(input)
+        user = Account.find_by(id: id, is_active: true) rescue nil
+        unless user.nil?
+          users.push user
+        end
+      else
+        extend ApplicationHelper
+        names = split_string(input)
+        if names.size == 1
+          username = normalizer.username(names[0])
+          name = normalizer.name(names[0])
+          users = Account.select(select_).order(order_).paginate(paginate_).where(where_).where(
+            "(
+            username = ? OR
+            first_name = ? OR first_name_ru = ? OR first_name_en = ? OR
+            last_name = ? OR last_name_ru = ? OR last_name_en = ?
+            )",
+            username,
+            name, name,
+            name, name,
+            name, name
+          ).all
+        elsif names.size >= 2
+          names_ = Array.new
+          names.each do |name|
+            names_.push(normalizer.name(name))
+          end
+          users = Account.select(select_).order(order_).paginate(paginate_).where(where_).where(
+            "(
+            (first_name IN (?) OR first_name_ru IN (?) OR first_name_en IN (?)) AND
+            (last_name IN (?) OR last_name_ru IN (?) OR last_name_en IN (?))
+            )",
+            names_, names_, names_,
+            names_, names_, names_
+          ).all
+        end
       end
-      # Is username or name.
-      username = normalizer.username(input)
-      name = normalizer.name(input)
-      # check columns username, first_name, last_name, first_name_ru, last_name_ru, first_name_en, last_name_en.
-
     end
     return users
+  end
+  def self.profile input
+    scanner = AccountHelper::AccountDataScanner.new
+    normalizer = AccountHelper::AccountNormalizer.new
+
+    if scanner.id(input)
+      input = normalizer.id(input)
+      user = Account.where("id = ?", input).first
+    else
+      input = normalizer.username(input)
+      user = Account.where("username = ?", input).first
+    end
+    unless user.nil?
+      if user.is_active == true
+        return {
+          :is_active => user.is_active,
+          :id => user.id,
+          :username => user.username,
+          :first_name => user.first_name,
+          :first_name_ru => user.first_name_ru,
+          :first_name_en => user.first_name_en,
+          :last_name => user.last_name,
+          :last_name_ru => user.last_name_ru,
+          :last_name_en => user.last_name_en,
+          :gender => user.gender,
+          :country => user.country,
+          :city => user.city,
+          :sign_in_at => user.sign_in_at,
+          :sign_up_at => user.sign_up_at
+        }
+      else
+        # User is deleted.
+        return {
+          :is_active => user.is_active,
+          :id => user.id,
+          :username => user.username,
+        }
+      end
+    end
+    return nil
   end
 end
