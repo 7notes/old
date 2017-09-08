@@ -11,6 +11,7 @@ end
 
 class Account < ApplicationRecord
   include AccountHelper
+  include ApplicationHelper
   include ActiveModel::Validations
   validates_with AccountValidator
 
@@ -28,8 +29,12 @@ class Account < ApplicationRecord
   	self.username = @normalizer.username self.username if self.username_changed?
   	self.email = @normalizer.email self.email if self.email_changed?
   	self.password = @normalizer.password self.password if self.password_changed?
-  	self.first_name = @normalizer.first_name self.first_name if self.first_name_changed?
-  	self.last_name = @normalizer.last_name self.last_name if self.last_name_changed?
+  	self.first_name = @normalizer.name self.first_name if self.first_name_changed?
+  	self.last_name = @normalizer.name self.last_name if self.last_name_changed?
+    self.first_name_ru = name_to_russian self.first_name
+    self.last_name_ru = name_to_russian self.last_name
+    self.first_name_en = name_to_english self.first_name
+    self.last_name_en = name_to_english self.last_name
   	self.language = @normalizer.language self.language if self.language_changed?
   	unless self.new_record?
       self.is_active = @normalizer.is_active self.is_active if self.is_active_changed?
@@ -59,4 +64,30 @@ class Account < ApplicationRecord
       inclusion: { in: [0, 1], message: "invalid" }
   validates :password,
       length: { minimum: 6, maximum: 100, too_short: "min", too_long: "max" }
+
+  def self.search input
+    scanner = AccountHelper::AccountScanner.new
+    normalizer = AccountHelper::AccountNormalizer.new
+    users = Array.new
+
+    input = input.to_s.strip
+
+    if scanner.id(input)
+      # Is ID.
+      id = input
+      user = Account.find_by(id: id, is_active: true) rescue nil
+      users.push user
+    else
+      names = split_string input
+      if names.size == 0
+        Account.select(:id, :username).order(sign_in_at: :desc).where(is_active: true).limit(100).all
+      end
+      # Is username or name.
+      username = normalizer.username(input)
+      name = normalizer.name(input)
+      # check columns username, first_name, last_name, first_name_ru, last_name_ru, first_name_en, last_name_en.
+
+    end
+    return users
+  end
 end

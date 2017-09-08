@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20170906160032) do
     t.string "sign_in_user_agent"
     t.string "first_name"
     t.string "last_name"
+    t.string "first_name_ru"
+    t.string "last_name_ru"
+    t.string "first_name_en"
+    t.string "last_name_en"
     t.integer "gender", limit: 2
     t.string "language"
     t.boolean "is_active", default: true

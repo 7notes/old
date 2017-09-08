@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+# ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 RSpec.configure do |c|
     c.use_transactional_examples = false
@@ -29,3 +29,5 @@ RSpec.describe Account, type: :model do
 	end
 	after(:all) { Account.destroy_all }
 end
+
+Account.find(1) rescue nil

@@ -37,11 +37,8 @@ module AccountHelper
     def username value
         value.to_s.strip.downcase
     end
-    def first_name value
+    def name value
         value.to_s.strip.gsub(' ', '').capitalize
-    end
-    def last_name value
-        self.first_name value
     end
     def gender value
         value = value.to_s.strip
@@ -75,6 +72,17 @@ module AccountHelper
 			return false
 		end
     end
+    def id value
+        if value.nil?
+            return 0
+        end
+        value = value.to_s.strip
+        if value == ""
+            return 0
+        else
+            return value.to_i
+        end
+    end
   end
   class AccountDataScanner
   	attr_reader :config
@@ -104,6 +112,15 @@ module AccountHelper
     	end
     	return false
     end
+    def id value
+    value = value.to_s.strip
+    begin
+        Integer(value)
+        return true
+    rescue
+    end
+    return false
+  end
   end
   def init_account
     @current_user = Account.find(session[:account_id]) rescue nil

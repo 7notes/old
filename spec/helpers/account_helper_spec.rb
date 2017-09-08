@@ -6,11 +6,8 @@ RSpec.describe AccountHelper, type: :helper do
 		it "username" do
 			expect(normalizer.username(" Nurasyl ")).to eq "nurasyl"
 		end
-		it "first_name" do
-			expect(normalizer.first_name(" нұр асыл ")).to eq "Нұрасыл"
-		end
-		it "last_name" do
-			expect(normalizer.last_name(" ал дан ")).to eq "Алдан"
+		it "name" do
+			expect(normalizer.name(" нұр асыл ")).to eq "Нұрасыл"
 		end
 		it "gender" do
 			expect(normalizer.gender(" 0 ")).to eq 0
@@ -33,11 +30,20 @@ RSpec.describe AccountHelper, type: :helper do
 		end
 		it "is_active" do
 			expect(normalizer.is_active(" true ")).to be true
-			expect(normalizer.is_active(" 1 ")).to eq true
-			expect(normalizer.is_active(" 0 ")).to eq false
-			expect(normalizer.is_active(" false ")).to eq false
-			expect(normalizer.is_active(" ")).to eq false
-			expect(normalizer.is_active(" 2 ")).to eq false
+			expect(normalizer.is_active(" 1 ")).to be true
+			expect(normalizer.is_active(" 0 ")).to be false
+			expect(normalizer.is_active(" false ")).to be false
+			expect(normalizer.is_active(" ")).to be false
+			expect(normalizer.is_active(" 2 ")).to be false
+		end
+		it "id" do
+			expect(normalizer.id(" ")).to eq 0
+			expect(normalizer.id(" 0 ")).to eq 0
+			expect(normalizer.id(" -1 ")).to eq -1
+			expect(normalizer.id(" 1 ")).to eq 1
+			expect(normalizer.id(" 5 ")).to eq 5
+			expect(normalizer.id(" 5.5 ")).to eq 5
+			expect(normalizer.id(" nur ")).to eq 0
 		end
 	end
 	context "scanner" do
@@ -79,6 +85,13 @@ RSpec.describe AccountHelper, type: :helper do
 			expect(scanner.gender(" 2 ")).to be false
 			expect(scanner.gender(" 1 ")).to be true
 			expect(scanner.gender(" 0 ")).to be true
+		end
+		it "id" do
+			expect(scanner.id(" ")).to be false
+			expect(scanner.id(" 0 ")).to be true
+			expect(scanner.id(" 1 ")).to be true
+			expect(scanner.id(" 1.5 ")).to be false
+			expect(scanner.id(" -1 ")).to be true
 		end
 	end
 end
