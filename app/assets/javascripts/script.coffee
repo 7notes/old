@@ -1,7 +1,6 @@
 if $("div[data-page='main']").length == 1
 	angular.module "main", []
 	.controller "main", ($scope, $http)->
-		
 
 	header = $('nav.navbar')
 	logo = header.find('a.navbar-brand img')

@@ -112,6 +112,10 @@ module AccountHelper
         @is_auth = true
     end
   end
+  def encrypt_password value
+    @normalizer = AccountNormalizer.new
+    return BCrypt::Password.create(@normalizer.password(value)).to_s
+  end
   def login account
     begin
         session[:account_id] = account.id
@@ -128,8 +132,15 @@ module AccountHelper
         return false
     end
   end
-  def encrypt_password value
-    @normalizer = AccountNormalizer.new
-    return BCrypt::Password.create(@normalizer.password(value)).to_s
+  def set_login_datetime
+    begin
+        if @is_auth == true
+            @current_user.sign_in_at = $datetime
+            @current_user.save!
+            return true
+        end
+    rescue
+    end
+    rescue false
   end
 end
