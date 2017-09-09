@@ -2,6 +2,9 @@ require 'rails_helper'
 
 # ActiveRecord::Base.logger = Logger.new(STDOUT)
 
+Blacklist.delete_all
+Account.delete_all
+
 RSpec.configure do |c|
     c.use_transactional_examples = false
     c.order = "defined"
@@ -22,7 +25,6 @@ RSpec.describe Account, type: :model do
 			begin
 				account.save!
 			rescue ActiveRecord::RecordInvalid
-				puts account.errors.messages
 			end
 		end
 		expect(account.valid?).to be true
@@ -46,5 +48,4 @@ RSpec.describe Account, type: :model do
 		expect(Account.profile(" Gaukhar ") == nil).to be true
 		expect(Account.profile(" Nurasyl ")[:username] == "nurasyl").to be true
 	end
-	after(:all) { Account.destroy_all }
 end

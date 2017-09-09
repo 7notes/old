@@ -128,6 +128,8 @@ module AccountHelper
     unless @current_user.nil?
         @is_auth = true
     end
+    $current_user = @current_user
+    $is_auth = @is_auth
   end
   def encrypt_password value
     @normalizer = AccountNormalizer.new

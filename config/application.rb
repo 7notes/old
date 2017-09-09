@@ -2,8 +2,6 @@ require_relative 'boot'
 
 require 'rails/all'
 
-require "./config/main"
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -36,5 +34,9 @@ module SevenNote
 	  expire_after: 90.minutes,
 	  key: "_#{Rails.application.class.parent_name.downcase}_session"
 	}
+	config.time_zone = 'UTC' # default timezone.
+	config.active_record.default_timezone = :utc # for columns (timestamps, datetime, time, date)
   end
 end
+
+require "./config/main"

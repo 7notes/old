@@ -10,20 +10,20 @@ class AccountValidator < ActiveModel::Validator
 end
 
 class Account < ApplicationRecord
+  has_many :blacklists, class_name: "Blacklist", foreign_key: "account_id", dependent: :destroy
+  
   include AccountHelper
   include ApplicationHelper
   include ActiveModel::Validations
   validates_with AccountValidator
 
-  self.table_name = "accounts"
-
   before_save do
     self.password = encrypt_password(self.password) if self.password_changed?
   end
   before_validation(on: :create) do
-    self.sign_up_at = $datetime
-    self.sign_in_at = self.sign_up_at
-    end
+    self.sign_in_at = $datetime
+    self.sign_up_at = self.sign_in_at
+  end
   before_validation do
   	@normalizer = AccountNormalizer.new
   	self.username = @normalizer.username self.username if self.username_changed?
@@ -35,7 +35,7 @@ class Account < ApplicationRecord
     self.last_name_ru = name_to_russian self.last_name
     self.first_name_en = name_to_english self.first_name
     self.last_name_en = name_to_english self.last_name
-  	self.language = @normalizer.language self.language if self.language_changed?
+  	self.language = @normalizer.language self.language
   	unless self.new_record?
       self.is_active = @normalizer.is_active self.is_active if self.is_active_changed?
   	end
@@ -68,7 +68,7 @@ class Account < ApplicationRecord
   def self.search input = nil, page = 1
     input = input.to_s.strip
     page = page.to_i
-    page = 1 if (page == 0)
+    page = 1 if page < 1
 
     scanner = AccountHelper::AccountDataScanner.new
     normalizer = AccountHelper::AccountNormalizer.new

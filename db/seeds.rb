@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+class DropBlacklists < ActiveRecord::Migration[5.1]
+  drop_table :blacklists, if_exists: true
+end
 class DropAccounts < ActiveRecord::Migration[5.1]
   drop_table :accounts, if_exists: true
 end

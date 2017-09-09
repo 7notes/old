@@ -1,2 +1,2 @@
-$time = Time.now.getutc.strftime("%s").to_i
-$datetime = Time.now.getutc
+$time = Time.now.strftime("%s").to_i
+$datetime = DateTime.now.in_time_zone(Rails.application.config.time_zone)
