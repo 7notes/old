@@ -26,13 +26,32 @@ end
 class Blacklist < ApplicationRecord
 	include ActiveModel::Validations
 	validates_with BlacklistValidator
+
 	belongs_to :account, class_name: "Account", foreign_key: "account_id"
 	belongs_to :user, class_name: "Account", foreign_key: "user_id"
 
 	class_attribute :limit
-	self.limit = 1000
+	self.limit = 500
 
 	attr_accessor :User_id
+
+  before_save do
+    favorite = $current_user.favorites.find_by(user_id: id)
+    unless favorite.nil?
+      favorite.destroy!
+      # Favorites count update.
+      $current_user.favorites_count = $current_user.favorites_count-1
+      $current_user.save!
+    end
+    follower = $current_user.followers.find_by(account_id: id)
+    unless follower.nil?
+      follower.destroy!
+      # Followers count update.
+      user = Account.find(self.User_id)
+      user.followers_count = user.followers_count-1
+      user.save!
+    end
+  end
 
 	def self.list page = 1
 		page = page.to_i

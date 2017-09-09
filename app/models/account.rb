@@ -11,6 +11,8 @@ end
 
 class Account < ApplicationRecord
   has_many :blacklists, class_name: "Blacklist", foreign_key: "account_id", dependent: :destroy
+  has_many :favorites, class_name: "Favorite", foreign_key: "account_id", dependent: :destroy
+  has_many :followers, class_name: "Favorite", foreign_key: "user_id", dependent: :destroy
   
   include AccountHelper
   include ApplicationHelper

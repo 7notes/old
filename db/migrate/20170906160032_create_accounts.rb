@@ -26,6 +26,9 @@ class CreateAccounts < ActiveRecord::Migration[5.1]
 
       t.string        :country, null: true
       t.string        :city, null: true
+
+      t.integer       :favorites_count, default: 0
+      t.integer       :followers_count, default: 0
     end
 
     add_index :accounts, :email,                unique: true

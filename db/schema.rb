@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909072430) do
+ActiveRecord::Schema.define(version: 20170909193649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20170909072430) do
     t.string "sign_up_user_agent"
     t.string "country"
     t.string "city"
+    t.integer "favorites_count", default: 0
+    t.integer "followers_count", default: 0
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["username"], name: "index_accounts_on_username", unique: true
   end
@@ -49,6 +51,17 @@ ActiveRecord::Schema.define(version: 20170909072430) do
     t.index ["user_id"], name: "index_blacklists_on_user_id"
   end
 
+  create_table "favorites", id: false, force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_favorites_on_account_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   add_foreign_key "blacklists", "accounts"
   add_foreign_key "blacklists", "accounts", column: "user_id"
+  add_foreign_key "favorites", "accounts"
+  add_foreign_key "favorites", "accounts", column: "user_id"
 end
