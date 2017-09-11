@@ -17,7 +17,8 @@ libxml2-dev libssl-dev libyaml-dev &&\
 libreadline6-dev zlib1g-dev libncurses5-dev &&\
 libffi-dev libgdbm3 libgdbm-dev &&\
 sqlite3 libsqlite3-dev &&\
-ruby2.4 ruby2.4-dev
+ruby2.4 ruby2.4-dev &&\
+libtag1-dev
 ```
 ##### Install Ruby on Rails
 ```

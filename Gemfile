@@ -66,3 +66,7 @@ gem 'redis-rails', '~> 5.0'
 gem 'slim-rails', '~> 3.1'
 # Pagination for model.
 gem 'will_paginate', '~> 3.1.0'
+# MP3 info.
+gem 'taglib-ruby', '~> 0.7.1', :require => 'taglib'
+# File MIME types.
+gem 'mimemagic', '~> 0.3.1'

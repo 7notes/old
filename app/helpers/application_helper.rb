@@ -90,4 +90,7 @@ module ApplicationHelper
 		value = value.scan /[^\s]+/
 		return value
 	end
+	def datetime_to_time value
+		value.to_time.to_i
+	end
 end

@@ -8,7 +8,7 @@ class BlacklistValidator < ActiveModel::Validator
         record.errors[:user] << "self"
       else
         if $current_user.blacklists.exists?(user_id: id)
-          record.errors[:user] << "is_exists"
+          record.errors[:user] << "unique"
         else
           if $current_user.blacklists.limit(Blacklist.limit).count(:account_id) >= Blacklist.limit
             record.errors[:user] << "limit"

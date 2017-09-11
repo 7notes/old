@@ -13,6 +13,7 @@ class Account < ApplicationRecord
   has_many :blacklists, class_name: "Blacklist", foreign_key: "account_id", dependent: :destroy
   has_many :favorites, class_name: "Favorite", foreign_key: "account_id", dependent: :destroy
   has_many :followers, class_name: "Favorite", foreign_key: "user_id", dependent: :destroy
+  has_many :mp3_files, class_name: "Mp3File", foreign_key: "account_id"
   
   include AccountHelper
   include ApplicationHelper

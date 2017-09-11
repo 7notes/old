@@ -2,6 +2,11 @@ require 'rails_helper'
 
 # ActiveRecord::Base.logger = Logger.new(STDOUT)
 
+Listener.delete_all
+Like.delete_all
+Music.delete_all
+Playlist.delete_all
+Mp3File.delete_all
 Blacklist.delete_all
 Account.delete_all
 
